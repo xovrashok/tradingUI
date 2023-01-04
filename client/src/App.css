@@ -10,11 +10,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  background: linear-gradient(
-    to left,
-    rgb(0, 0, 0) 0%,
-    rgb(28, 28, 28) 100%
-  );
+  background: linear-gradient(to left, rgb(0, 0, 0) 0%, rgb(28, 28, 28) 100%);
 }
 
 .app-title {
@@ -79,23 +75,22 @@ body {
   font-size: 18px;
 }
 
-
 /* caselle opzioni */
- .option-type {
+.option-type {
   display: flex;
   flex-direction: row;
   margin-bottom: 36px;
   width: 100%;
- }
+}
 
- .option-amount {
+.option-amount {
   display: flex;
   flex-direction: row;
   width: 100%;
- }
+}
 
- .button-opt {
-  background-color: #181A20;
+.button-opt {
+  background-color: #181a20;
   color: rgb(100, 100, 100);
   font-size: 14px;
   font-weight: bold;
@@ -106,23 +101,21 @@ body {
   border-color: rgb(100, 100, 100);
   border-radius: 4px;
   width: 100%;
- }
+}
 
 .button-opt:hover {
   opacity: 0.8;
- }
- .button-opt:active {
+}
+.button-opt:active {
   opacity: 0.3;
- }
+}
 
-
-
- /* bottoni long short */
- .buttons {
+/* bottoni long short */
+.buttons {
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin-top: 30px;
-  height: 76px; 
+  height: 76px;
 }
 
 .long {
@@ -153,12 +146,11 @@ body {
 .short:hover,
 .long:hover {
   opacity: 0.8;
- }
- .short:active,
- .long:active {
+}
+.short:active,
+.long:active {
   opacity: 0.3;
- }
-
+}
 
 .ordini {
   display: flex;
@@ -175,7 +167,7 @@ body {
   color: rgb(119, 119, 119);
 }
 .close-button {
-  background-color: #181A20;
+  background-color: #181a20;
   color: white;
   cursor: pointer;
   margin-left: 8px;
@@ -192,10 +184,3 @@ body {
 .close-button:active {
   opacity: 0.3;
 }
-
-
-
-
-
-
-

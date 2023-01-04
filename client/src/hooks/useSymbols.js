@@ -1,21 +1,13 @@
-import { useCallback, useEffect, useState } from "react";
-import { httpGetSymbols } from "./requests";
+import { useGetRequest } from './requests';
 
+const useSymbols = () => {
+  const { data, error, isLoading } = useGetRequest('/markets');
 
-function useSymbols() {
-  const [ symbols, setSymbols ] = useState([]);
-
-  const getSymbols = useCallback(async () => {
-    const fetchedSymbols = await httpGetSymbols();
-    setSymbols(fetchedSymbols);
-  }, []);
-
-  useEffect(() => {
-    getSymbols();
-  }, [getSymbols]);
-
-  return symbols;
-}
-
+  return {
+    data,
+    error,
+    isLoading,
+  };
+};
 
 export default useSymbols;
