@@ -11,7 +11,7 @@ async function httpGetPosition(req, res) {
 async function httpClosePosition(req, res) {
   const orderParams = req.body;
 
-  if (!orderParams.symbol || !orderParams.type || !orderParams.sideClose || !orderParams.contracts) {
+  if (!orderParams.symbol || !orderParams.type || !orderParams.sideClose || !orderParams.contracts || !orderParams.reduction) {
     return res.status(400).json({
       error: 'Missing required order property',
     });
