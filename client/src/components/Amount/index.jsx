@@ -11,16 +11,16 @@ const Amount = ({ amount, onChange }) => {
         <button className="button-opt" onClick={() => onChange(20000)}>
           20000
         </button>
-        <button className="button-opt" onClick={() => onChange(1000)}>
-          1000
+        <button className="button-opt" onClick={() => onChange(33000)}>
+          33000
         </button>
       </div>
       <div className="option-amount">
         <button className="button-opt" onClick={() => onChange(50000)}>
           50000
         </button>
-        <button className="button-opt" onClick={() => onChange(75000)}>
-          75000
+        <button className="button-opt" onClick={() => onChange(1000)}>
+          1000
         </button>
       </div>
     </div>
