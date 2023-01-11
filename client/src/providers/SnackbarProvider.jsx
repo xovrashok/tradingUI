@@ -15,7 +15,7 @@ const SnackbarProvider = (props) => {
   const openSnackbar = (msg) => {
     setMessage(msg);
     setIsOpen(true);
-    timer = setTimeout(closeSnackbar, 3000); // close snackbar after 3 seconds
+    timer = setTimeout(closeSnackbar, 4000); // close snackbar after 3 seconds
   };
 
   return (
