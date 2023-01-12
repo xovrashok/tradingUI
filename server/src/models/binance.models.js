@@ -41,7 +41,9 @@ async function createNewOrder(orderParams) {
       const stopPrice = ticker.last * 0.995;
       try {
         const order = await binanceFuture.createOrder(symbol, type , side, amountCoin, price, { timeInForce: 'IOC' });
-        const sl = await binanceFuture.createOrder(symbol, 'market' , 'sell', amountCoin, stopPrice, { stopPrice: stopPrice });
+        if (order.status === 'closed') {
+          const sl = await binanceFuture.createOrder(symbol, 'market' , 'sell', amountCoin, stopPrice, { stopPrice: stopPrice });
+        }
         return order; 
       } catch (e) {
         console.log(e.constructor.name, e.message);
@@ -54,7 +56,9 @@ async function createNewOrder(orderParams) {
       const stopPrice = ticker.last * 1.005;
       try {
         const order = await binanceFuture.createOrder(symbol, type , side, amountCoin, price, { timeInForce: 'IOC' });
-        const sl = await binanceFuture.createOrder(symbol, 'market' , 'buy', amountCoin, stopPrice, { stopPrice: stopPrice });
+        if (order.status === 'closed') {
+          const sl = await binanceFuture.createOrder(symbol, 'market' , 'buy', amountCoin, stopPrice, { stopPrice: stopPrice });
+        }
         return order; 
       } catch (e) {
         console.log(e.constructor.name, e.message);
