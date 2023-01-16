@@ -5,10 +5,10 @@ import config from './config';
 import Symbols from './components/Symbols';
 import OrderType from './components/OrderType';
 import Amount from './components/Amount';
-import OrderParams from './components/OrderParams';
 import Positions from './components/Positions';
 import CreateOrder from './components/CreateOrder';
 import './App.css';
+import TradingPair from './components/TradingPair/TradingPair';
 
 const App = () => {
   const [selectedSymbol, setSelectedSymbol] = useState(null);
@@ -26,9 +26,9 @@ const App = () => {
 
         <div className="contenitore">
           <Symbols onChange={setSelectedSymbol} selectedSymbol={selectedSymbol} />
-          <OrderType type={orderType} onChange={setOrderType} />
+          <TradingPair onChange={setAmount} selectSymbol={setSelectedSymbol}/>
           <Amount amount={amount} onChange={setAmount} />
-          <OrderParams />
+          <OrderType type={orderType} onChange={setOrderType} />
         </div>
 
         <CreateOrder selectedSymbol={selectedSymbol} orderType={orderType} amount={amount} />

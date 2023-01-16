@@ -4,7 +4,7 @@ const Amount = ({ amount, onChange }) => {
   const formattedAmount = useMemo(() => amount / 1000 + '.000$', [amount]);
 
   return (
-    <div className="blocco">
+    <div className="blocco amount">
       <div className="selection"> {formattedAmount || 'amount'} </div>
 
       <div className="option-amount">

@@ -5,6 +5,7 @@ import SnackbarContext from '../contects/SnackbarContext';
 const SnackbarProvider = (props) => {
   const [message, setMessage] = useState('');
   const [isOpen, setIsOpen] = useState(false);
+  const [isError, setIsError] = useState(false);
   let timer;
 
   const closeSnackbar = () => {
@@ -12,7 +13,8 @@ const SnackbarProvider = (props) => {
     setIsOpen(false);
   };
 
-  const openSnackbar = (msg) => {
+  const openSnackbar = (msg, error = false) => {
+    setIsError(error);
     setMessage(msg);
     setIsOpen(true);
     timer = setTimeout(closeSnackbar, 4000); // close snackbar after 3 seconds
@@ -25,6 +27,7 @@ const SnackbarProvider = (props) => {
         isOpen,
         openSnackbar,
         closeSnackbar,
+        isError,
       }}
     >
       {props.children}
