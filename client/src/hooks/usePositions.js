@@ -1,9 +1,7 @@
 import { useGetRequest } from './requests';
 
 const usePositions = () => {
-  const { data, error, isLoading, mutate } = useGetRequest('/position', {
-    refreshInterval: 300000,
-  });
+  const { data, error, isLoading, mutate } = useGetRequest('/position');
 
   return {
     data,

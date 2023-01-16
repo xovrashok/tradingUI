@@ -8,29 +8,42 @@ const Positions = () => {
 
   return (
     <div className="list-wrapper">
-      {!isLoading
-        ? positions.map((position, index) => {
+      {!isLoading ? (
+        <>
+          <div className="ordini">
+            <div>Side</div>
+            <div>Symbol</div>
+            <div>Size</div>
+            <div>Entry Price</div>
+            <div>Reduce Button</div>
+            <div>Close</div>
+          </div>
+          {positions.map((position, index) => {
             console.log(position, 'in arr');
             return (
               <div key={index} className="ordini">
-                <p>{position.side}</p>
+                <div>
+                  {position.side === 'long' ? <div className="green-circle" /> : <div className="red-circle" />}
+                </div>
                 <p>{position.symbol}</p>
-                <p>Size: {position.notional}</p>
-                <p>EntryPrice: {position.entryPrice}</p>
-                <div className='reduce-container'>
-                  <button 
+                <p>{position.notional.toFixed(2)}</p>
+                <p>{position.entryPrice.toFixed(2)}</p>
+                <div className="reduce-container">
+                  <button
                     className="reduce-button"
-                    onClick={() => closePosition(position.symbol, position.side, position.contracts, config.smallReduce)}
+                    onClick={() =>
+                      closePosition(position.symbol, position.side, position.contracts, config.smallReduce)
+                    }
                   >
                     20
                   </button>
-                  <button 
+                  <button
                     className="reduce-button"
                     onClick={() => closePosition(position.symbol, position.side, position.contracts, config.midReduce)}
                   >
                     33
                   </button>
-                  <button 
+                  <button
                     className="reduce-button"
                     onClick={() => closePosition(position.symbol, position.side, position.contracts, config.bigReduce)}
                   >
@@ -45,8 +58,9 @@ const Positions = () => {
                 </button>
               </div>
             );
-          })
-        : null}
+          })}
+        </>
+      ) : null}
     </div>
   );
 };

@@ -22,26 +22,49 @@ body {
 
 .contenitore {
   display: grid;
-  grid-template-columns: 1fr 1fr;
   row-gap: 10px;
   column-gap: 6px;
   margin: 4px;
+  grid-template-areas:
+    'symbols symbols symbols trading'
+    'amount amount order order';
 }
-@media (max-width: 869px) {
-  .contenitore {
-    grid-template-columns: 1fr 1fr;
-  }
+
+.selection-wrapper {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
 }
-@media (min-width: 870px) {
-  .contenitore {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
+
+.bin-link {
+  width: 30px;
+  height: 30px;
+  align-self: center;
+}
+
+.symbols {
+  justify-content: space-between;
+  grid-area: symbols;
+}
+
+.trading {
+  justify-content: center;
+  grid-area: trading;
+}
+
+.amount {
+  justify-content: space-between;
+  grid-area: amount;
+}
+
+.order {
+  justify-content: space-between;
+  grid-area: order;
 }
 
 .blocco {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
   border: 2px;
   border-radius: 6px;
@@ -67,10 +90,15 @@ body {
   box-shadow: 1px 1px 4px rgb(255, 255, 255);
 }
 
+.symbol-btn {
+  width: 70%;
+}
+
 .basic {
   margin-bottom: 34px;
   width: 94%;
 }
+
 .basic-single {
   font-size: 18px;
 }
@@ -104,6 +132,7 @@ body {
 .button-opt:hover {
   opacity: 0.8;
 }
+
 .button-opt:active {
   opacity: 0.3;
 }
@@ -113,7 +142,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin-top: 30px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   height: 76px;
 }
 
@@ -142,19 +171,21 @@ body {
   font-weight: bold;
   transition: opacity 0.15s;
 }
+
 .short:hover,
 .long:hover {
   opacity: 0.8;
 }
+
 .short:active,
 .long:active {
   opacity: 0.3;
 }
 
 .ordini {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   align-items: center;
   border: 2px;
   border-radius: 6px;
@@ -164,21 +195,54 @@ body {
   font-size: 20px;
   color: rgb(255, 255, 255);
 }
+
+.container {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  align-items: center;
+  border: 2px;
+  border-radius: 6px;
+  border-bottom: solid;
+  border-color: rgb(56, 56, 56);
+  margin: 0px 5px 0px 5px;
+  font-size: 20px;
+  color: rgb(255, 255, 255);
+}
+
+.green-circle {
+  width: 20px;
+  height: 20px;
+  background-color: rgb(14, 203, 129);
+  border-radius: 10px;
+  margin: 0 auto;
+}
+
+.red-circle {
+  width: 20px;
+  height: 20px;
+  background-color: rgb(246, 70, 93);
+  border-radius: 10px;
+  margin: 0 auto;
+}
+
 .close-button {
   background-color: #181a20;
   color: rgb(209, 209, 209);
   cursor: pointer;
-  margin-left: 8px;
-  margin-right: 4px;
   padding: 10px 12px;
   border-style: solid;
   border-radius: 6px;
   font-size: 18px;
   transition: opacity 0.15s;
+  width: 45px;
+  justify-self: center;
 }
+
 .close-button:hover {
   opacity: 0.8;
 }
+
 .close-button:active {
   opacity: 0.3;
 }
@@ -186,7 +250,7 @@ body {
 .reduce-container {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 }
 
@@ -199,9 +263,23 @@ body {
   transition: opacity 0.15s;
   border-radius: 6px;
 }
+
 .reduce-button:hover {
   opacity: 0.8;
 }
+
 .reduce-button:active {
   opacity: 0.3;
+}
+
+.refetch-button {
+  padding: 7px 132px;
+  cursor: pointer;
+  font-size: 32px;
+  color: white;
+  border-radius: 6px;
+  background-color: #282b34;
+  border: 1px solid rgb(104, 104, 104);
+  box-shadow: 1px 1px 4px rgb(255 255 255);
+  margin-bottom: 40px;
 }
