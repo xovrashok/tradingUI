@@ -28,7 +28,7 @@ const Positions = () => {
           {positions.map((position, index) => {
             console.log(position, 'in arr');
             return (
-              <div key={index} className="ordini">
+              <div key={index} className="container">
                 <div>
                   {position.side === 'long' ? <div className="green-circle" /> : <div className="red-circle" />}
                 </div>

@@ -20,8 +20,8 @@ const Symbols = ({ onChange, selectedSymbol }) => {
         >
           <img 
             className='bin-logo'
-            width={28} 
-            height={28} 
+            width={24} 
+            height={24} 
             src="https://cdn.pixabay.com/photo/2021/04/30/16/47/binance-logo-6219389_1280.png" 
             alt="" 
           />

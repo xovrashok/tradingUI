@@ -49,7 +49,7 @@ body {
 }
 
 .bin-logo {
-  border-radius: 16px;
+  border-radius: 6px;
 }
 
 
@@ -175,7 +175,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   margin-top: 34px;
-  margin-bottom: 20px;
+  margin-bottom: 38px;
   height: 82px;
 }
 
@@ -218,7 +218,7 @@ body {
 .ordini {
   display: grid;
   grid-template-rows: 1fr;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr;
   align-items: center;
   border: 2px;
   border-radius: 6px;
@@ -232,28 +232,26 @@ body {
 .container {
   display: grid;
   grid-template-rows: 1fr;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr;
   align-items: center;
-  border: 2px;
-  border-radius: 6px;
+  border: 1px;
   border-bottom: solid;
   border-color: rgb(56, 56, 56);
-  margin: 0px 5px 0px 5px;
   font-size: 20px;
   color: rgb(255, 255, 255);
 }
 
 .green-circle {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   background-color: rgb(14, 203, 129);
   border-radius: 10px;
   margin: 0 auto;
 }
 
 .red-circle {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   background-color: rgb(246, 70, 93);
   border-radius: 10px;
   margin: 0 auto;
@@ -263,7 +261,7 @@ body {
   background-color: #181a20;
   color: rgb(209, 209, 209);
   cursor: pointer;
-  padding: 10px 12px;
+  padding: 8px 12px;
   border-style: solid;
   border-radius: 6px;
   font-size: 18px;
@@ -306,13 +304,13 @@ body {
 }
 
 .refetch-button {
-  padding: 2px;
+  padding: 4px;
   cursor: pointer;
-  align-items:flex-end;
+  align-items: flex-end;
   font-size: 14px;
   color: white;
   border-radius: 6px;
-  background-color: #9e0404;
+  background-color: #1e1d1d;
   border: 1px solid rgb(104, 104, 104);
   margin-bottom: 8px;
   margin-top: 30px;
