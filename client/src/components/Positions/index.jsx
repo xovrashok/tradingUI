@@ -3,11 +3,18 @@ import useClosePosition from '../../hooks/useClosePosition';
 import config from '../../config';
 
 const Positions = () => {
-  const { data: positions, isLoading } = usePosition();
+  const { data: positions, isLoading, refetch } = usePosition();
   const { closePosition } = useClosePosition();
 
   return (
-    <div className="list-wrapper">
+    <>
+      <button 
+        className="refetch-button" 
+        onClick={() => refetch()}
+      >
+        &#8634;
+      </button>
+      <div className="list-wrapper">
       {!isLoading ? (
         <>
           <div className="ordini">
@@ -15,7 +22,7 @@ const Positions = () => {
             <div>Symbol</div>
             <div>Size</div>
             <div>Entry Price</div>
-            <div>Reduce Button</div>
+            <div>Reduce</div>
             <div>Close</div>
           </div>
           {positions.map((position, index) => {
@@ -62,6 +69,7 @@ const Positions = () => {
         </>
       ) : null}
     </div>
+    </>
   );
 };
 

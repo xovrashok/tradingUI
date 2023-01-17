@@ -32,13 +32,13 @@ async function createNewOrder(orderParams) {
   const { symbol, type, side, amount } = orderParams;
   const ticker = await (binanceFuture.fetchTicker (symbol));
   let market = binanceFuture.markets[symbol]; 
-  binanceFuture.fapiPrivate_post_leverage({"symbol": market['id'], "leverage": 7});
+  binanceFuture.fapiPrivate_post_leverage({"symbol": market['id'], "leverage": 6});
 
   if (type === 'limit') {
     if (side === 'buy') {
       const price = ticker.last * 1.015;
       const amountCoin = amount / ticker.last;
-      const stopPrice = ticker.last * 0.995;
+      const stopPrice = ticker.last * 0.99;
       try {
         const order = await binanceFuture.createOrder(symbol, type , side, amountCoin, price, { timeInForce: 'IOC' });
         if (order.status === 'closed') {
@@ -53,7 +53,7 @@ async function createNewOrder(orderParams) {
     if (side === 'sell') {
       const price = ticker.last * 0.985;
       const amountCoin = amount / ticker.last;
-      const stopPrice = ticker.last * 1.005;
+      const stopPrice = ticker.last * 1.01;
       try {
         const order = await binanceFuture.createOrder(symbol, type , side, amountCoin, price, { timeInForce: 'IOC' });
         if (order.status === 'closed') {
@@ -70,7 +70,7 @@ async function createNewOrder(orderParams) {
   if (type === 'market') {
     if (side === 'buy') {
       const amountCoin = amount / ticker.last;
-      const stopPrice = ticker.last * 0.995;
+      const stopPrice = ticker.last * 0.99;
       try {
         const order = await binanceFuture.createOrder(symbol, type, side, amountCoin);
         const sl = await binanceFuture.createOrder(symbol, 'market' , 'sell', amountCoin, stopPrice, { stopPrice: stopPrice });
@@ -82,7 +82,7 @@ async function createNewOrder(orderParams) {
     }
     if (side === 'sell') {
       const amountCoin = amount / ticker.last;
-      const stopPrice = ticker.last * 1.005;
+      const stopPrice = ticker.last * 1.01;
       try {
         const order = await binanceFuture.createOrder(symbol, type, side, amountCoin);
         const sl = await binanceFuture.createOrder(symbol, 'market' , 'buy', amountCoin, stopPrice, { stopPrice: stopPrice });

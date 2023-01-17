@@ -24,9 +24,11 @@ const App = () => {
       <div className="App">
         <h1 className="app-title"> MENU </h1>
 
-        <div className="contenitore">
+        <div className="contenitore-top">
           <Symbols onChange={setSelectedSymbol} selectedSymbol={selectedSymbol} />
           <TradingPair onChange={setAmount} selectSymbol={setSelectedSymbol}/>
+        </div>
+        <div className="contenitore">
           <Amount amount={amount} onChange={setAmount} />
           <OrderType type={orderType} onChange={setOrderType} />
         </div>

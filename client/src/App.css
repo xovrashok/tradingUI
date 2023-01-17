@@ -26,31 +26,32 @@ body {
   column-gap: 6px;
   margin: 4px;
   grid-template-areas:
-    'symbols symbols symbols trading'
     'amount amount order order';
+}
+
+.contenitore-top {
+  display: grid;
+  grid-template-columns: 3.5fr 1fr;
+  row-gap: 10px;
+  column-gap: 6px;
+  margin: 4px;
 }
 
 .selection-wrapper {
   display: flex;
-  justify-content: space-around;
   width: 100%;
 }
 
 .bin-link {
-  width: 30px;
+  width: 60px;
   height: 30px;
   align-self: center;
 }
 
-.symbols {
-  justify-content: space-between;
-  grid-area: symbols;
+.bin-logo {
+  border-radius: 16px;
 }
 
-.trading {
-  justify-content: center;
-  grid-area: trading;
-}
 
 .amount {
   justify-content: space-between;
@@ -66,7 +67,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 2px;
+  border: 1px;
   border-radius: 6px;
   border-style: solid;
   border-color: rgb(56, 56, 56);
@@ -75,7 +76,7 @@ body {
 .selection {
   background-color: #282b34;
   color: white;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
   border: 1px;
   border-style: solid;
@@ -83,31 +84,63 @@ body {
   width: 82%;
   border-radius: 6px;
   margin-top: 8px;
-  padding: 12px;
-  margin-bottom: 16px;
+  padding: 8px;
+  margin-bottom: 10px;
   justify-content: space-between;
   align-items: center;
   box-shadow: 1px 1px 4px rgb(255, 255, 255);
 }
-
-.symbol-btn {
-  width: 70%;
+.selectionSy {
+  background-color: #282b34;
+  color: white;
+  font-size: 28px;
+  font-weight: bold;
+  border: 1px;
+  border-style: solid;
+  border-color: rgb(104, 104, 104);
+  width: 80%;
+  border-radius: 6px;
+  margin-top: 8px;
+  margin-left: 28px;
+  padding: 16px;
+  margin-bottom: 18px;
+  box-shadow: 1px 1px 4px rgb(255, 255, 255);
+  width: 66%;
+}
+.selection1 {
+  background-color: #282b34;
+  color: rgb(238, 208, 12);
+  font-size: 18px;
+  border: 1px;
+  border-style: solid;
+  border-color: rgb(104, 104, 104);
+  width: 72%;
+  border-radius: 6px;
+  margin-top: 8px;
+  padding: 4px;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .basic {
-  margin-bottom: 34px;
-  width: 94%;
+  margin-bottom: 14px;
+  width: 90%;
 }
 
 .basic-single {
   font-size: 18px;
 }
 
+.input-amount {
+  margin-top: 32px;
+  width: 42px;
+  margin-left: 35px;
+}
 /* caselle opzioni */
 .option-type {
   display: flex;
   flex-direction: row;
-  margin-bottom: 36px;
+  margin-bottom: 18px;
   width: 100%;
 }
 
@@ -120,12 +153,12 @@ body {
 .button-opt {
   background-color: #181a20;
   color: rgb(209, 209, 209);
-  font-size: 14px;
-  padding: 4px 12px;
-  margin: 4px;
+  font-size: 12px;
+  padding: 2px 8px;
+  margin: 2px;
   cursor: pointer;
   border-style: solid;
-  border-radius: 4px;
+  border-radius: 6px;
   width: 100%;
 }
 
@@ -141,9 +174,9 @@ body {
 .buttons {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  margin-top: 30px;
+  margin-top: 34px;
   margin-bottom: 20px;
-  height: 76px;
+  height: 82px;
 }
 
 .long {
@@ -189,10 +222,10 @@ body {
   align-items: center;
   border: 2px;
   border-radius: 6px;
-  border-bottom: solid;
+  border: solid;
   border-color: rgb(56, 56, 56);
   margin: 0px 5px 0px 5px;
-  font-size: 20px;
+  font-size: 18px;
   color: rgb(255, 255, 255);
 }
 
@@ -273,13 +306,14 @@ body {
 }
 
 .refetch-button {
-  padding: 7px 132px;
+  padding: 2px;
   cursor: pointer;
-  font-size: 32px;
+  align-items:flex-end;
+  font-size: 14px;
   color: white;
   border-radius: 6px;
-  background-color: #282b34;
+  background-color: #9e0404;
   border: 1px solid rgb(104, 104, 104);
-  box-shadow: 1px 1px 4px rgb(255 255 255);
-  margin-bottom: 40px;
+  margin-bottom: 8px;
+  margin-top: 30px;
 }

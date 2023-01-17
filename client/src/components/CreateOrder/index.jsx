@@ -1,9 +1,7 @@
 import useOrders from '../../hooks/useOrders';
-import usePosition from '../../hooks/usePositions';
 
 const CreateOrder = ({ selectedSymbol, orderType, amount }) => {
   const { createLongOrder, createShortOrder } = useOrders();
-  const { refetch } = usePosition();
 
   // Event handles
   const handleLongClick = () => createLongOrder(selectedSymbol, orderType, amount);
@@ -19,9 +17,6 @@ const CreateOrder = ({ selectedSymbol, orderType, amount }) => {
           Short
         </button>
       </div>
-      <button className="refetch-button" onClick={() => refetch()}>
-        Refresh
-      </button>
     </>
   );
 };

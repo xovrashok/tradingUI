@@ -3,11 +3,11 @@ import config from '../../config';
 
 const Symbols = ({ onChange, selectedSymbol }) => {
   //change to config.binLinkPRD for production link
-  const getLinkToBinance = selectedSymbol ? config.binLinkTest + selectedSymbol.label.replace(/[^a-z]/gi, '') : '';
+  const getLinkToBinance = selectedSymbol ? config.binLinkPRD + selectedSymbol.label.replace(/[^a-z]/gi, '') : '';
   return (
     <div className="blocco symbols">
       <div className="selection-wrapper">
-        <div className="selection symbol-btn" id="symbol" name="symbol">
+        <div className="selectionSy" id="symbol" name="symbol">
           {selectedSymbol ? selectedSymbol.label : 'symbol'}
         </div>
         <a
@@ -16,8 +16,15 @@ const Symbols = ({ onChange, selectedSymbol }) => {
           href={getLinkToBinance}
           target="_blank"
           className={`bin-link ${!selectedSymbol ? 'is-disable' : ''}`}
+          rel="noreferrer"
         >
-          <img width={30} height={30} src="https://cdn.pixabay.com/photo/2021/04/30/16/47/bnb-6219388_640.png" alt="" />
+          <img 
+            className='bin-logo'
+            width={28} 
+            height={28} 
+            src="https://cdn.pixabay.com/photo/2021/04/30/16/47/binance-logo-6219389_1280.png" 
+            alt="" 
+          />
         </a>
       </div>
       <div className="basic">

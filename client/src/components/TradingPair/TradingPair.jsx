@@ -17,15 +17,15 @@ const TradingPair = ({ onChange, selectSymbol }) => {
   const isCoinExistInSymbols = (coin) =>
     !!symbols.find((symbol) => symbol.label.replace(/[^a-z]/gi, '') === coin.replace(/[^a-z]/gi, ''));
 
-  const getLinkToBinance = (symbol) => config.binLinkTest + symbol.replace(/[^a-z]/gi, '');
+  const getLinkToBinance = (symbol) => config.binLinkPRD + symbol.replace(/[^a-z]/gi, '');
 
   return (
     <div className="blocco trading">
       {selectedCoins.map((coin, index) => {
         return (
           <a
-            role="button"
-            className="selection"
+            role='button'
+            className="selection1"
             id="symbol"
             key={coin + index}
             onClick={() => {
@@ -43,7 +43,11 @@ const TradingPair = ({ onChange, selectSymbol }) => {
         );
       })}
 
-      <input type="number" onChange={(event) => onChange(event?.target?.value * 1000)} />
+      <input 
+        className="input-amount"
+        type="number" 
+        onChange={(event) => onChange(event?.target?.value * 1000)} 
+      />
     </div>
   );
 };
