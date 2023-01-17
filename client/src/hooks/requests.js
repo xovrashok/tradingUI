@@ -16,18 +16,29 @@ const getRequestFetcher = (url, init) => {
 export const useGetRequest = (url, requestConfig) => useSWR(config.apiEndpoint + url, getRequestFetcher, requestConfig);
 
 const createPostOrPutFetcher = (requestMethod) => {
-  return (url, { arg }) => {
-    return fetch(url, {
+  return async (url, { arg }) => {
+    const res = await fetch(url, {
       method: requestMethod,
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(arg),
-    }).then((res) => res.json());
+    });
+
+    if (!res.ok) {
+      const body = await res.json();
+      const error = new Error(body.error);
+      throw error;
+    }
+
+    return res.json();
   };
 };
 
 // https://swr.vercel.app/docs/global-configuration
-export const usePostRequest = (url) => useSWRMutation(config.apiEndpoint + url, createPostOrPutFetcher(REQUEST_METHOD.POST));
-export const usePutRequest = (url) => useSWRMutation(config.apiEndpoint + url, createPostOrPutFetcher(REQUEST_METHOD.PUT));
-export const useDeleteRequest = (url) => useSWRMutation(config.apiEndpoint + url, createPostOrPutFetcher(REQUEST_METHOD.DELETE));
+export const usePostRequest = (url) =>
+  useSWRMutation(config.apiEndpoint + url, createPostOrPutFetcher(REQUEST_METHOD.POST));
+export const usePutRequest = (url) =>
+  useSWRMutation(config.apiEndpoint + url, createPostOrPutFetcher(REQUEST_METHOD.PUT));
+export const useDeleteRequest = (url) =>
+  useSWRMutation(config.apiEndpoint + url, createPostOrPutFetcher(REQUEST_METHOD.DELETE));

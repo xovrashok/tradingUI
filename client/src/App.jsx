@@ -15,7 +15,7 @@ const App = () => {
   // market or limit
   const [orderType, setOrderType] = useState(null);
   // order amount
-  const [amount, setAmount] = useState(config.defaultAmount);
+  const [amount, setAmount] = useState(null);
   // idk what's this at the moment
   // const [selectedParams, setSelectedParams] = useState({});
 

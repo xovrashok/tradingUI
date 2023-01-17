@@ -23,7 +23,8 @@ const TradingPair = ({ onChange, selectSymbol }) => {
     <div className="blocco trading">
       {selectedCoins.map((coin, index) => {
         return (
-          <button
+          <a
+            role="button"
             className="selection"
             id="symbol"
             key={coin + index}
@@ -38,7 +39,7 @@ const TradingPair = ({ onChange, selectSymbol }) => {
             }}
           >
             {coin}
-          </button>
+          </a>
         );
       })}
 

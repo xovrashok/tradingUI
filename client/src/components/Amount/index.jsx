@@ -5,7 +5,7 @@ const Amount = ({ amount, onChange }) => {
 
   return (
     <div className="blocco amount">
-      <div className="selection"> {formattedAmount || 'amount'} </div>
+      <div className="selection"> {amount ? formattedAmount : 'amount'} </div>
 
       <div className="option-amount">
         <button className="button-opt" onClick={() => onChange(25000)}>
