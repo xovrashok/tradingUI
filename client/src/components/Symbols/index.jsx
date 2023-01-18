@@ -3,7 +3,7 @@ import config from '../../config';
 
 const Symbols = ({ onChange, selectedSymbol }) => {
   //change to config.binLinkPRD for production link
-  const getLinkToBinance = selectedSymbol ? config.binLinkPRD + selectedSymbol.label.replace(/[^a-z]/gi, '') : '';
+  const getLinkToBinance = selectedSymbol ? config.binLinkPRD + selectedSymbol.label.replace(/[^a-z0-9]/gi, '') : '';
   return (
     <div className="blocco symbols">
       <div className="selection-wrapper">

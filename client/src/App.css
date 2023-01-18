@@ -108,7 +108,9 @@ body {
   width: 66%;
 }
 .selection1 {
+  font-family: 'Open Sans Condensed', sans-serif;
   background-color: #282b34;
+  cursor: pointer;
   color: rgb(238, 208, 12);
   font-size: 18px;
   border: 1px;
@@ -174,8 +176,8 @@ body {
 .buttons {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  margin-top: 34px;
-  margin-bottom: 38px;
+  margin-top: 30px;
+  margin-bottom: 28px;
   height: 82px;
 }
 
@@ -220,7 +222,7 @@ body {
   grid-template-rows: 1fr;
   grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr 1fr;
   align-items: center;
-  border: 2px;
+  border: 1px;
   border-radius: 6px;
   border: solid;
   border-color: rgb(56, 56, 56);

@@ -15,22 +15,21 @@ const TradingPair = ({ onChange, selectSymbol }) => {
   }, [coins]);
 
   const isCoinExistInSymbols = (coin) =>
-    !!symbols.find((symbol) => symbol.label.replace(/[^a-z]/gi, '') === coin.replace(/[^a-z]/gi, ''));
+    !!symbols.find((symbol) => symbol.label.replace(/[^a-z0-9]/gi, '') === coin.replace(/[^a-z0-9]/gi, ''));
 
-  const getLinkToBinance = (symbol) => config.binLinkPRD + symbol.replace(/[^a-z]/gi, '');
+  const getLinkToBinance = (symbol) => config.binLinkPRD + symbol.replace(/[^a-z0-9]/gi, '');
 
   return (
     <div className="blocco trading">
       {selectedCoins.map((coin, index) => {
         return (
-          <a
-            role='button'
+          <button
             className="selection1"
             id="symbol"
             key={coin + index}
             onClick={() => {
               if (isCoinExistInSymbols(coin)) {
-                window.open(getLinkToBinance(coin), '_blank');
+                window.open(getLinkToBinance(coin), '_blank', "noreferrer noopener");
                 selectSymbol({ label: coin, value: coin });
               } else {
                 //Some symbols exist in Binance but not exist in symbol array
@@ -39,7 +38,7 @@ const TradingPair = ({ onChange, selectSymbol }) => {
             }}
           >
             {coin}
-          </a>
+          </button>
         );
       })}
 
