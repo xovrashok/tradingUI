@@ -2,7 +2,7 @@ const ccxt = require ('ccxt');
 require('dotenv').config();
 
 
-const binanceFuture = new ccxt.binance({
+const binanceFuture = new ccxt.pro.binanceusdm({
   //'rateLimit': 1000,
   'apiKey': process.env.BINANCE_API_KEY,
   'secret': process.env.BINANCE_SECRET_KEY,
@@ -17,7 +17,33 @@ async function loadMarkets() {
   const markets = await binanceFuture.loadMarkets();
   let ids = binanceFuture.ids;
   console.log(`${ids.length} markets found!`);
+  loadTickers();
   return markets;
+}
+
+async function loadTickers() {
+  await Promise.all (binanceFuture.symbols.map (symbol => loop(symbol)));
+}
+
+let tickArr = [];
+
+async function loop(symbol) {
+  while (true) {
+    try {
+      const ticker = await binanceFuture.watchTicker(symbol);
+      let tickers = {symbol: '', last:''};
+      if (!tickArr.find(e=>e.symbol === symbol)) {
+        tickers.symbol = symbol;
+        tickers.last = ticker['last'];
+        tickArr.push(tickers);
+      } else {
+        let objIndex = tickArr.findIndex((e => e.symbol == symbol));
+        tickArr[objIndex].last = ticker['last'];
+      }
+    } catch (e) {
+      console.log (symbol, e)
+    }
+  }   
 }
 
 
@@ -30,18 +56,18 @@ function getAllSymbols() {
 
 async function createNewOrder(orderParams) {
   const { symbol, type, side, amount } = orderParams;
-  const ticker = await (binanceFuture.fetchTicker (symbol));
+  let objIndex = tickArr.findIndex((e => e.symbol == symbol));
   let market = binanceFuture.markets[symbol]; 
   binanceFuture.fapiPrivate_post_leverage({"symbol": market['id'], "leverage": 6});
 
   if (type === 'limit') {
     if (side === 'buy') {
-      const price = ticker.last * 1.015;
-      const amountCoin = amount / ticker.last;
-      const stopPrice = ticker.last * 0.99;
+      const price = tickArr[objIndex].last * 1.01;
+      const amountCoin = amount / tickArr[objIndex].last;
       try {
         const order = await binanceFuture.createOrder(symbol, type , side, amountCoin, price, { timeInForce: 'IOC' });
         if (order.status === 'closed') {
+          const stopPrice = order.average * 0.992;
           const sl = await binanceFuture.createOrder(symbol, 'market' , 'sell', amountCoin, stopPrice, { stopPrice: stopPrice });
         }
         return order; 
@@ -51,12 +77,12 @@ async function createNewOrder(orderParams) {
       }
     }
     if (side === 'sell') {
-      const price = ticker.last * 0.985;
-      const amountCoin = amount / ticker.last;
-      const stopPrice = ticker.last * 1.01;
+      const price = tickArr[objIndex].last * 0.99;
+      const amountCoin = amount / tickArr[objIndex].last;
       try {
         const order = await binanceFuture.createOrder(symbol, type , side, amountCoin, price, { timeInForce: 'IOC' });
         if (order.status === 'closed') {
+          const stopPrice = order.average * 1.008;
           const sl = await binanceFuture.createOrder(symbol, 'market' , 'buy', amountCoin, stopPrice, { stopPrice: stopPrice });
         }
         return order; 
@@ -69,10 +95,10 @@ async function createNewOrder(orderParams) {
 
   if (type === 'market') {
     if (side === 'buy') {
-      const amountCoin = amount / ticker.last;
-      const stopPrice = ticker.last * 0.99;
+      const amountCoin = amount / tickArr[objIndex].last;
       try {
         const order = await binanceFuture.createOrder(symbol, type, side, amountCoin);
+        const stopPrice = order.average * 0.992;
         const sl = await binanceFuture.createOrder(symbol, 'market' , 'sell', amountCoin, stopPrice, { stopPrice: stopPrice });
         return order; 
       } catch (e) {
@@ -81,10 +107,10 @@ async function createNewOrder(orderParams) {
       }
     }
     if (side === 'sell') {
-      const amountCoin = amount / ticker.last;
-      const stopPrice = ticker.last * 1.01;
+      const amountCoin = amount / tickArr[objIndex].last;
       try {
         const order = await binanceFuture.createOrder(symbol, type, side, amountCoin);
+        const stopPrice = order.average * 1.008;
         const sl = await binanceFuture.createOrder(symbol, 'market' , 'buy', amountCoin, stopPrice, { stopPrice: stopPrice });
         return order;
       } catch (e) {
