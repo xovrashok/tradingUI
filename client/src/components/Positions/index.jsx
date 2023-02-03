@@ -22,6 +22,7 @@ const Positions = () => {
             <div>Symbol</div>
             <div>Size</div>
             <div>Entry Price</div>
+            <div>PNL</div>
             <div>Reduce</div>
             <div>Close</div>
           </div>
@@ -33,8 +34,19 @@ const Positions = () => {
                   {position.side === 'long' ? <div className="green-circle" /> : <div className="red-circle" />}
                 </div>
                 <p>{position.symbol}</p>
-                <p>{position.notional.toFixed(2)}</p>
+                <p>{position.notional.toFixed(0)}</p>
                 <p>{position.entryPrice.toFixed(2)}</p>
+                <div>
+                  {position.unrealizedPnl > 0 ? 
+                    <p className="pnl-green">
+                      {position.unrealizedPnl.toFixed(2)}$
+                      ({(position.percentage / position.leverage).toFixed(2)}%)
+                    </p> : 
+                    <p className="pnl-red">
+                      {position.unrealizedPnl.toFixed(2)}$
+                      ({(position.percentage / position.leverage).toFixed(2)}%)
+                    </p>}
+                </div>
                 <div className="reduce-container">
                   <button
                     className="reduce-button"
