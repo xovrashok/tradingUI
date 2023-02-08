@@ -55,69 +55,74 @@ function getAllSymbols() {
 
 
 async function createNewOrder(orderParams) {
-  const { symbol, type, side, amount } = orderParams;
-  let objIndex = tickArr.findIndex((e => e.symbol == symbol));
-  let market = binanceFuture.markets[symbol]; 
-  binanceFuture.fapiPrivate_post_leverage({"symbol": market['id'], "leverage": 6});
+  try {
+    const { symbol, type, side, amount } = orderParams;
+    let objIndex = tickArr.findIndex((e => e.symbol == symbol));
+    let market = binanceFuture.markets[symbol]; 
+    binanceFuture.fapiPrivate_post_leverage({"symbol": market['id'], "leverage": 6});
 
-  if (type === 'limit') {
-    if (side === 'buy') {
-      const price = tickArr[objIndex].last * 1.01;
-      const amountCoin = amount / tickArr[objIndex].last;
-      try {
-        const order = await binanceFuture.createOrder(symbol, type , side, amountCoin, price, { timeInForce: 'IOC' });
-        if (order.status === 'closed') {
+    if (type === 'limit') {
+      if (side === 'buy') {
+        const price = tickArr[objIndex].last * 1.01;
+        const amountCoin = amount / tickArr[objIndex].last;
+        try {
+          const order = await binanceFuture.createOrder(symbol, type , side, amountCoin, price, { timeInForce: 'IOC' });
+          if (order.status === 'closed') {
+            const stopPrice = order.average * 0.992;
+            const sl = await binanceFuture.createOrder(symbol, 'market' , 'sell', amountCoin, stopPrice, { stopPrice: stopPrice });
+          }
+          return order; 
+        } catch (e) {
+          console.log(e.constructor.name, e.message);
+          return e.message;
+        }
+      }
+      if (side === 'sell') {
+        const price = tickArr[objIndex].last * 0.99;
+        const amountCoin = amount / tickArr[objIndex].last;
+        try {
+          const order = await binanceFuture.createOrder(symbol, type , side, amountCoin, price, { timeInForce: 'IOC' });
+          if (order.status === 'closed') {
+            const stopPrice = order.average * 1.008;
+            const sl = await binanceFuture.createOrder(symbol, 'market' , 'buy', amountCoin, stopPrice, { stopPrice: stopPrice });
+          }
+          return order; 
+        } catch (e) {
+          console.log(e.constructor.name, e.message);
+          return e.message
+        }
+      }
+    }
+
+    if (type === 'market') {
+      if (side === 'buy') {
+        const amountCoin = amount / tickArr[objIndex].last;
+        try {
+          const order = await binanceFuture.createOrder(symbol, type, side, amountCoin);
           const stopPrice = order.average * 0.992;
           const sl = await binanceFuture.createOrder(symbol, 'market' , 'sell', amountCoin, stopPrice, { stopPrice: stopPrice });
+          return order; 
+        } catch (e) {
+          console.log(e.constructor.name, e.message);
+          return e.message;
         }
-        return order; 
-      } catch (e) {
-        console.log(e.constructor.name, e.message);
-        return e.message;
       }
-    }
-    if (side === 'sell') {
-      const price = tickArr[objIndex].last * 0.99;
-      const amountCoin = amount / tickArr[objIndex].last;
-      try {
-        const order = await binanceFuture.createOrder(symbol, type , side, amountCoin, price, { timeInForce: 'IOC' });
-        if (order.status === 'closed') {
+      if (side === 'sell') {
+        const amountCoin = amount / tickArr[objIndex].last;
+        try {
+          const order = await binanceFuture.createOrder(symbol, type, side, amountCoin);
           const stopPrice = order.average * 1.008;
           const sl = await binanceFuture.createOrder(symbol, 'market' , 'buy', amountCoin, stopPrice, { stopPrice: stopPrice });
+          return order;
+        } catch (e) {
+          console.log(e.constructor.name, e.message);
+          return e.message;
         }
-        return order; 
-      } catch (e) {
-        console.log(e.constructor.name, e.message);
-        return e.message
       }
     }
-  }
-
-  if (type === 'market') {
-    if (side === 'buy') {
-      const amountCoin = amount / tickArr[objIndex].last;
-      try {
-        const order = await binanceFuture.createOrder(symbol, type, side, amountCoin);
-        const stopPrice = order.average * 0.992;
-        const sl = await binanceFuture.createOrder(symbol, 'market' , 'sell', amountCoin, stopPrice, { stopPrice: stopPrice });
-        return order; 
-      } catch (e) {
-        console.log(e.constructor.name, e.message);
-        return e.message;
-      }
-    }
-    if (side === 'sell') {
-      const amountCoin = amount / tickArr[objIndex].last;
-      try {
-        const order = await binanceFuture.createOrder(symbol, type, side, amountCoin);
-        const stopPrice = order.average * 1.008;
-        const sl = await binanceFuture.createOrder(symbol, 'market' , 'buy', amountCoin, stopPrice, { stopPrice: stopPrice });
-        return order;
-      } catch (e) {
-        console.log(e.constructor.name, e.message);
-        return e.message;
-      }
-    }
+  } catch (e) {
+    console.log(e.constructor.name, e.message);
+    return e.message;
   }
 }
 
