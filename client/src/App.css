@@ -267,14 +267,14 @@ p {
 }
 
 .green-circle {
-  width: 10px;
+  width: 8px;
   height: 40px;
   background-color: rgb(14, 203, 129);
   margin: 0 auto;
 }
 
 .red-circle {
-  width: 10px;
+  width: 8px;
   height: 40px;
   background-color: rgb(246, 70, 93);
   margin: 0 auto;
