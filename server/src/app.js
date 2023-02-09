@@ -1,6 +1,5 @@
 const express = require('express');
 const morgan = require('morgan');
-const helmet = require('helmet');
 const path = require('path');
 const cors = require('cors');
 
@@ -10,7 +9,6 @@ const positionRouter = require('./routes/position/position.router');
 
 const app = express();
 
-app.use(helmet());
 app.use(cors({ origin: 'http://localhost:3000' }));
 app.use(morgan('combined'));
 app.use(express.json());
