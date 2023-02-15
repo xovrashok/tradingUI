@@ -1,12 +1,12 @@
-const { 
-  getPosition,
-  closePosition
-} = require('../../models/binance.models');
+const { getPosition, closePosition } = require('../../models/binanceFuture.models');
+const { getOpenBags, sellTheBag } = require('../../models/binanceSpot.models')
+
 
 
 async function httpGetPosition(req, res) {
   return res.status(200).json(await getPosition());
 }
+
 
 async function httpClosePosition(req, res) {
   const orderParams = req.body;
@@ -21,7 +21,28 @@ async function httpClosePosition(req, res) {
 }
 
 
+async function httpGetOpenBags(req, res) {
+  return res.status(200).json(await getOpenBags());
+}
+
+
+async function httpSellTheBag(req, res) {
+  const orderParams = req.body;
+
+  if (!orderParams.symbol || !orderParams.type || !orderParams.sideClose || !orderParams.contracts || !orderParams.reduction) {
+    return res.status(400).json({
+      error: 'Missing required order property',
+    });
+  }
+
+  return res.status(201).json(await sellTheBag(orderParams));
+}
+
+
+
 module.exports = {
   httpGetPosition,
-  httpClosePosition
+  httpClosePosition,
+  httpGetOpenBags,
+  httpSellTheBag
 };

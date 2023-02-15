@@ -1,14 +1,16 @@
 const http = require('http');
 const app = require('./app');
 
-const { loadMarkets } = require('./models/binance.models');
+const { loadFutureMarkets } = require('./models/binanceFuture.models');
+const { loadSpotMarkets } = require('./models/binanceSpot.models');
 
 const PORT = process.env.PORT || 8000;
 
 const server = http.createServer(app);
 
 async function startServer() {
-  await loadMarkets();
+  await loadSpotMarkets();
+  await loadFutureMarkets();
 
   server.listen(PORT, () => {
     console.log(`Listening on port ${PORT}...`);

@@ -1,7 +1,7 @@
 import { useGetRequest } from './requests';
 
 const usePositions = () => {
-  const { data, error, isLoading, mutate } = useGetRequest('/position');
+  const { data, error, isLoading, mutate } = useGetRequest('/position/future');
 
   return {
     data,

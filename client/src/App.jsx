@@ -7,17 +7,14 @@ import OrderType from './components/OrderType';
 import Amount from './components/Amount';
 import Positions from './components/Positions';
 import CreateOrder from './components/CreateOrder';
-import './App.css';
 import TradingPair from './components/TradingPair/TradingPair';
+
+import './App.css';
 
 const App = () => {
   const [selectedSymbol, setSelectedSymbol] = useState(null);
-  // market or limit
   const [orderType, setOrderType] = useState(null);
-  // order amount
   const [amount, setAmount] = useState(null);
-  // idk what's this at the moment
-  // const [selectedParams, setSelectedParams] = useState({});
 
   return (
     <SWRConfig value={config.swr}>

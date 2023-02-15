@@ -1,7 +1,7 @@
 import { useGetRequest } from './requests';
 
 const useSymbols = () => {
-  const { data, error, isLoading } = useGetRequest('/markets');
+  const { data, error, isLoading } = useGetRequest('/markets/spot');
 
   return {
     data,
