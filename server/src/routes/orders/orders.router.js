@@ -1,13 +1,9 @@
 const express = require('express');
 
-const { 
-  httpCreateSpotOrder,
-  httpCreateNewOrder 
-} = require('./orders.controller');
+const { httpCreateNewOrder } = require('./orders.controller');
 
 const orderRouter = express.Router();
 
-orderRouter.post('/spot', httpCreateSpotOrder);
-orderRouter.post('/future', httpCreateNewOrder);
+orderRouter.post('/', httpCreateNewOrder);
 
 module.exports = orderRouter;

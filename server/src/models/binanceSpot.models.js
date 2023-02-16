@@ -64,7 +64,7 @@ async function createSpotOrder(orderParams) {
         const price = tickArr[objIndex].last * 1.01;
         const amountCoin = amount / tickArr[objIndex].last;
         try {
-          const order = await binanceFuture.createOrder(symbol, type , side, amountCoin, price);
+          const order = await binance.createOrder(symbol, type , side, amountCoin, price);
           return order; 
         } catch (e) {
           console.log(e.constructor.name, e.message);
@@ -75,7 +75,7 @@ async function createSpotOrder(orderParams) {
         const price = tickArr[objIndex].last * 0.99;
         const amountCoin = amount / tickArr[objIndex].last;
         try {
-          const order = await binanceFuture.createOrder(symbol, type , side, amountCoin, price);
+          const order = await binance.createOrder(symbol, type , side, amountCoin, price);
           return order; 
         } catch (e) {
           console.log(e.constructor.name, e.message);
@@ -83,12 +83,11 @@ async function createSpotOrder(orderParams) {
         }
       }
     }
-
     if (type === 'market') {
       if (side === 'buy') {
         const amountCoin = amount / tickArr[objIndex].last;
         try {
-          const order = await binanceFuture.createOrder(symbol, type, side, amountCoin);
+          const order = await binance.createOrder(symbol, type, side, amountCoin);
           return order; 
         } catch (e) {
           console.log(e.constructor.name, e.message);
@@ -98,7 +97,7 @@ async function createSpotOrder(orderParams) {
       if (side === 'sell') {
         const amountCoin = amount / tickArr[objIndex].last;
         try {
-          const order = await binanceFuture.createOrder(symbol, type, side, amountCoin);
+          const order = await binance.createOrder(symbol, type, side, amountCoin);
           return order;
         } catch (e) {
           console.log(e.constructor.name, e.message);
@@ -106,12 +105,12 @@ async function createSpotOrder(orderParams) {
         }
       }
     }
-
   } catch (e) {
     console.log(e.constructor.name, e.message);
     return e.message;
   }
 }
+
 
 async function getOpenBags() {
   let positions = await binance.fetchBalance();
@@ -138,7 +137,7 @@ async function sellTheBag(orderParams) {
   let size = quantity * reduction;
 
   try {
-    const closedPosition = await binanceFuture.createOrder(symbol, type, sideClose, size);
+    const closedPosition = await binance.createOrder(symbol, type, sideClose, size);
     return closedPosition; 
   } catch (e) {
     console.log(e.constructor.name, e.message);

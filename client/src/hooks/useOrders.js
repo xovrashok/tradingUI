@@ -4,7 +4,7 @@ import usePositions from './usePositions';
 import useSnackbar from './useSnackbar';
 
 function useOrders() {
-  const { data, error, trigger, reset, isMutating } = usePostRequest('/orders/future');
+  const { data, error, trigger, reset, isMutating } = usePostRequest('/orders');
   const { refetch: refetchPositions } = usePositions();
   const { openSnackbar, openErrorSnackbar } = useSnackbar();
 
