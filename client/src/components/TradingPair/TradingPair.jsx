@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import useSocket from '../../hooks/useSocket';
-//import config from '../../config';
 import useSymbols from '../../hooks/useSymbols';
 import useSnackbar from '../../hooks/useSnackbar';
 
@@ -17,7 +16,6 @@ const TradingPair = ({ onChange, selectSymbol }) => {
   const isCoinExistInSymbols = (coin) =>
     !!symbols.find((symbol) => symbol.label.replace(/[^a-z0-9]/gi, '') === coin.replace(/[^a-z0-9]/gi, ''));
 
-  //const getLinkToBinance = (symbol) => config.binLinkPRD + symbol.replace(/[^a-z0-9]/gi, '');
 
   return (
     <div className="blocco trading">
@@ -29,7 +27,6 @@ const TradingPair = ({ onChange, selectSymbol }) => {
             key={coin + index}
             onClick={() => {
               if (isCoinExistInSymbols(coin)) {
-                //window.open(getLinkToBinance(coin), '_blank', "noreferrer noopener");
                 selectSymbol({ label: coin, value: coin });
               } else {
                 //Some symbols exist in Binance but not exist in symbol array

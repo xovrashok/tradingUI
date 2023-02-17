@@ -9,7 +9,8 @@ const config = {
   swr: {
     revalidateOnFocus: false,
   },
-  binLinkPRD: 'http://binance.com/en/futures/',
+  binFutureLinkPRD: 'https://binance.com/en/futures/',
+  binSpotLinkPRD: 'https://www.binance.com/en/trade/',
   binLinkTest: 'https://testnet.binancefuture.com/en/futures/',
 };
 

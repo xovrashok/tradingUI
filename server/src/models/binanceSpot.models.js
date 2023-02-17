@@ -41,7 +41,7 @@ async function loop(symbol) {
         tickArr[objIndex].last = ticker['last'];
       }
     } catch (e) {
-      console.log (symbol, e)
+      console.log (symbol);
     }
   }   
 }
@@ -49,7 +49,9 @@ async function loop(symbol) {
 
 function getAllSymbols() {
   let symbols = binance.symbols;
-  const renderSymbols = symbols.map(opt => ({ label: opt, value: opt }));
+  let endRegex = /USDT$|BUSD$/gi;
+  const selected = symbols.filter(e => e.match(endRegex));
+  const renderSymbols = selected.map(opt => ({ label: opt, value: opt }));
   return renderSymbols; 
 }
 
@@ -113,22 +115,27 @@ async function createSpotOrder(orderParams) {
 
 
 async function getOpenBags() {
-  let positions = await binance.fetchBalance();
-  const openBags = positions.total;
-  let openPositions = [];
-  for (let coin in openBags) {
-    let bags = {coin: '', quantity: '', value: ''};
-    if (openBags[coin] !== 0 && coin != 'USDT' && coin != 'ETF') {  
-      const symb = coin + '/USDT';
-      const objIndex = tickArr.findIndex((e => e.symbol == symb));
-      const price = tickArr[objIndex].last;
-      const bagsValue = (openBags[coin] * price).toFixed(2);
-      bags.coin = coin;
-      bags.quantity = openBags[coin];
-      bags.value = bagsValue;
-      openPositions.push(bags);
-    } 
-  }return openPositions;
+  try {
+    let positions = await binance.fetchBalance();
+    const openBags = positions.total;
+    let openPositions = [];
+    for (let coin in openBags) {
+      let bags = {coin: '', quantity: '', value: ''};
+      if (openBags[coin] !== 0 && coin != 'USDT' && coin != 'ETF') {  
+        const symb = coin + '/USDT';
+        const objIndex = tickArr.findIndex((e => e.symbol == symb));
+        const price = tickArr[objIndex].last || 0;
+        const bagsValue = (openBags[coin] * price).toFixed(2);
+        bags.coin = coin;
+        bags.quantity = openBags[coin];
+        bags.value = bagsValue;
+        openPositions.push(bags);
+      } 
+    }return openPositions;  
+  } catch(e) {
+    console.log(e.constructor.name, e.message);
+    return e.message;
+  }
 }
 
 
