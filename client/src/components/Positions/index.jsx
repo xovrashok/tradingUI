@@ -1,19 +1,13 @@
-import usePosition from '../../hooks/usePositions';
 import useClosePosition from '../../hooks/useClosePosition';
+import usePosition from '../../hooks/usePositions';
 import config from '../../config';
 
 const Positions = () => {
-  const { data: positions, isLoading, refetch } = usePosition();
+  const { data: positions, isLoading } = usePosition();
   const { closePosition } = useClosePosition();
 
   return (
     <>
-      <button 
-        className="refetch-button" 
-        onClick={() => refetch()}
-      >
-        &#8634;
-      </button>
       <div className="list-wrapper">
       {!isLoading ? (
         <>
@@ -50,9 +44,7 @@ const Positions = () => {
                 <div className="reduce-container">
                   <button
                     className="reduce-button"
-                    onClick={() =>
-                      closePosition(position.symbol, position.side, position.contracts, config.smallReduce)
-                    }
+                    onClick={() => closePosition(position.symbol, position.side, position.contracts, config.smallReduce)}
                   >
                     20
                   </button>

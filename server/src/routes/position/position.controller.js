@@ -29,7 +29,7 @@ async function httpGetOpenBags(req, res) {
 async function httpSellTheBag(req, res) {
   const orderParams = req.body;
 
-  if (!orderParams.symbol || !orderParams.type || !orderParams.sideClose || !orderParams.contracts || !orderParams.reduction) {
+  if (!orderParams.symbol || !orderParams.type || !orderParams.contracts || !orderParams.reduction) {
     return res.status(400).json({
       error: 'Missing required order property',
     });
