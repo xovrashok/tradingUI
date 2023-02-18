@@ -5,7 +5,7 @@ import config from '../../config';
 const Bags = () => {
   const { data: bags, isLoading } = useBags();
   const { sellBags } = useSellBags();
-
+  
   return (
     <>
       <div className="list-wrapper">

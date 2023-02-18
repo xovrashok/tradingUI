@@ -22,7 +22,13 @@ async function loadSpotMarkets() {
 }
 
 async function loadTickers() {
-  await Promise.all (binance.symbols.map (symbol => loop(symbol)));
+  let symbols = binance.symbols;
+  let endRegex = /USDT$|BUSD$/gi;
+  const preSelected = symbols.filter(e => e.match(endRegex));
+  let endRegex2 = /UP\/USDT$|DOWN\/USDT$|UP\/BUSD$|DOWN\/BUSD$/gi;
+  const selected = preSelected.filter(e => !e.match(endRegex2));
+
+  await Promise.all (selected.map (symbol => loop(symbol)));
 }
 
 let tickArr = [];
@@ -50,7 +56,10 @@ async function loop(symbol) {
 function getAllSymbols() {
   let symbols = binance.symbols;
   let endRegex = /USDT$|BUSD$/gi;
-  const selected = symbols.filter(e => e.match(endRegex));
+  const preSelected = symbols.filter(e => e.match(endRegex));
+  let endRegex2 = /UP\/USDT$|DOWN\/USDT$|UP\/BUSD$|DOWN\/BUSD$/gi;
+  const selected = preSelected.filter(e => !e.match(endRegex2));
+
   const renderSymbols = selected.map(opt => ({ label: opt, value: opt }));
   return renderSymbols; 
 }
@@ -140,11 +149,11 @@ async function getOpenBags() {
 
 
 async function sellTheBag(orderParams) {
-  const { symbol, type, sideClose, quantity, reduction } = orderParams;
-  let size = quantity * reduction;
+  const { symbol, type, side, contracts, reduction } = orderParams;
+  let size = contracts * reduction;
 
   try {
-    const closedPosition = await binance.createOrder(symbol, type, sideClose, size);
+    const closedPosition = await binance.createOrder(symbol, type, side, size);
     return closedPosition; 
   } catch (e) {
     console.log(e.constructor.name, e.message);

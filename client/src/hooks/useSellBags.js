@@ -1,5 +1,4 @@
 import { usePostRequest } from './requests';
-//import { ORDER_SIDE, ORDER_SIDE_CLOSE } from '../constants';
 import useSnackbar from './useSnackbar';
 import useBags from './useBags';
 
@@ -8,18 +7,17 @@ const useSellBags = () => {
   const { openSnackbar, openErrorSnackbar } = useSnackbar();
   const { refetch: refetchBags } = useBags();
 
-  const sellBags = async (symbol, contracts, reduction = 1) => {
+  const sellBags = async (coin, contracts, reduction = 1) => {
     try {
       const type = 'market';
-      //const sideClose = side === ORDER_SIDE.LONG ? ORDER_SIDE_CLOSE.SELL : ORDER_SIDE_CLOSE.BUY;
-      const side = 'sell'
+      const side = 'sell';
+      const symbol = coin + '/USDT';
 
       trigger({
         symbol,
+        type,
         side,
         contracts,
-        type,
-        //sideClose,
         reduction,
       });
 
