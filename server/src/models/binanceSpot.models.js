@@ -68,12 +68,19 @@ function getAllSymbols() {
 async function createSpotOrder(orderParams) {
   try{
     const { symbol, type, side, amount } = orderParams;
+    const size = amount < 10000 ? amount : 10000;
+    const transfer = await binance.sapi_post_futures_transfer({
+      'asset': 'USDT',
+      'amount': size,
+      'type': 2,
+    })
+    console.log(transfer);
     let objIndex = tickArr.findIndex((e => e.symbol == symbol));
 
     if (type === 'limit') {
       if (side === 'buy') {
         const price = tickArr[objIndex].last * 1.01;
-        const amountCoin = amount / tickArr[objIndex].last;
+        const amountCoin = size / tickArr[objIndex].last;
         try {
           const order = await binance.createOrder(symbol, type , side, amountCoin, price);
           return order; 
@@ -84,7 +91,7 @@ async function createSpotOrder(orderParams) {
       }
       if (side === 'sell') {
         const price = tickArr[objIndex].last * 0.99;
-        const amountCoin = amount / tickArr[objIndex].last;
+        const amountCoin = size / tickArr[objIndex].last;
         try {
           const order = await binance.createOrder(symbol, type , side, amountCoin, price);
           return order; 
@@ -96,7 +103,7 @@ async function createSpotOrder(orderParams) {
     }
     if (type === 'market') {
       if (side === 'buy') {
-        const amountCoin = amount / tickArr[objIndex].last;
+        const amountCoin = size / tickArr[objIndex].last;
         try {
           const order = await binance.createOrder(symbol, type, side, amountCoin);
           return order; 
@@ -106,7 +113,7 @@ async function createSpotOrder(orderParams) {
         }
       }
       if (side === 'sell') {
-        const amountCoin = amount / tickArr[objIndex].last;
+        const amountCoin = size / tickArr[objIndex].last;
         try {
           const order = await binance.createOrder(symbol, type, side, amountCoin);
           return order;
@@ -115,7 +122,7 @@ async function createSpotOrder(orderParams) {
           return e.message;
         }
       }
-    }
+    } 
   } catch (e) {
     console.log(e.constructor.name, e.message);
     return e.message;
