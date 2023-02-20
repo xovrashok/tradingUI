@@ -145,7 +145,9 @@ async function getOpenBags() {
         bags.coin = coin;
         bags.quantity = openBags[coin];
         bags.value = bagsValue;
-        openPositions.push(bags);
+        if (bagsValue > 5) {
+          openPositions.push(bags);
+        }
       } 
     }return openPositions;  
   } catch(e) {
