@@ -12,9 +12,11 @@ const binance = new ccxt.pro.binanceusdm({
   }
 });
 //binance.setSandboxMode(true);
+const binanceFuture = new ccxt.pro.binanceusdm({'options': {'defaultType': 'future'}})
 
 async function loadSpotMarkets() { 
   const markets = await binance.loadMarkets();
+  await binanceFuture.loadMarkets();
   let ids = binance.ids;
   console.log(`${ids.length} spot markets found!`);
   loadTickers();
@@ -55,12 +57,20 @@ async function loop(symbol) {
 
 function getAllSymbols() {
   let symbols = binance.symbols;
+  let futSymbols = binanceFuture.symbols;
+
   let endRegex = /USDT$|BUSD$/gi;
   const preSelected = symbols.filter(e => e.match(endRegex));
   let endRegex2 = /UP\/USDT$|DOWN\/USDT$|UP\/BUSD$|DOWN\/BUSD$/gi;
   const selected = preSelected.filter(e => !e.match(endRegex2));
 
-  const renderSymbols = selected.map(opt => ({ label: opt, value: opt }));
+  const complete = selected.reduce(
+      (acc, item) => {
+        return acc.includes(item) ? acc : [...acc, item];
+      }, [...futSymbols]
+    );
+
+  const renderSymbols = complete.map(opt => ({ label: opt, value: opt }));
   return renderSymbols; 
 }
 
@@ -80,7 +90,7 @@ async function createSpotOrder(orderParams) {
     if (type === 'limit') {
       if (side === 'buy') {
         const price = tickArr[objIndex].last * 1.01;
-        const amountCoin = size / tickArr[objIndex].last;
+        const amountCoin = (size / tickArr[objIndex].last) * 0.9;
         try {
           const order = await binance.createOrder(symbol, type , side, amountCoin, price);
           return order; 
@@ -91,7 +101,7 @@ async function createSpotOrder(orderParams) {
       }
       if (side === 'sell') {
         const price = tickArr[objIndex].last * 0.99;
-        const amountCoin = size / tickArr[objIndex].last;
+        const amountCoin = (size / tickArr[objIndex].last) * 0.9;
         try {
           const order = await binance.createOrder(symbol, type , side, amountCoin, price);
           return order; 
@@ -103,7 +113,7 @@ async function createSpotOrder(orderParams) {
     }
     if (type === 'market') {
       if (side === 'buy') {
-        const amountCoin = size / tickArr[objIndex].last;
+        const amountCoin = (size / tickArr[objIndex].last) * 0.9;
         try {
           const order = await binance.createOrder(symbol, type, side, amountCoin);
           return order; 
@@ -113,7 +123,7 @@ async function createSpotOrder(orderParams) {
         }
       }
       if (side === 'sell') {
-        const amountCoin = size / tickArr[objIndex].last;
+        const amountCoin = (size / tickArr[objIndex].last) * 0.9;
         try {
           const order = await binance.createOrder(symbol, type, side, amountCoin);
           return order;
