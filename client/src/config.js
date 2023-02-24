@@ -1,8 +1,7 @@
 const config = {
   // TODO: Use from environment variable
   apiEndpoint: 'http://localhost:8000',
-  wsUri: 'wss://www.madnews.io/ws',
-  defaultAmount: 'amount',
+  wsUri: 'wss://news.treeofalpha.com/ws',
   smallReduce: 0.2,
   midReduce: 0.33,
   bigReduce: 0.5,

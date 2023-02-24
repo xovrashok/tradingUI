@@ -28,12 +28,12 @@ const Positions = () => {
                   {position.side === 'long' ? <div className="green-circle" /> : <div className="red-circle" />}
                 </div>
                 <p>{position.symbol}</p>
-                <p>{position.notional.toFixed(0)}</p>
+                <p>{position.notional.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p>
                 <p>{position.entryPrice.toFixed(2)}</p>
                 <div>
                   {position.unrealizedPnl > 0 ? 
                     <p className="pnl-green">
-                      {position.unrealizedPnl.toFixed(2)}$
+                      {position.unrealizedPnl.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}
                       ({(position.percentage / position.leverage).toFixed(2)}%)
                     </p> : 
                     <p className="pnl-red">

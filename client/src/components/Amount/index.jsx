@@ -1,11 +1,9 @@
-import { useMemo } from 'react';
 
 const Amount = ({ amount, onChange }) => {
-  const formattedAmount = useMemo(() => amount / 1000 + '.000$', [amount]);
 
   return (
     <div className="blocco amount">
-      <div className="selection"> {amount ? formattedAmount : 'amount'} </div>
+      <div className="selection"> {amount ? amount.toLocaleString('en-US', {style: 'currency', currency: 'USD'}) : 'amount'} </div>
 
       <div className="option-amount">
         <button className="button-opt" onClick={() => onChange(25000)}>

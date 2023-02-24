@@ -27,7 +27,7 @@ const Bags = () => {
                 <p> eventual img </p>
                 <p>{bag.coin}</p>
                 <p>{bag.quantity}</p>
-                <p>{bag.value}$</p>
+                <p>{bag.value.toLocaleString('en-US', {style: 'currency', currency: 'USD'})}</p>
                 <div>eventual pnl</div>
                 <div className="reduce-container">
                   <button
