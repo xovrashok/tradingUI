@@ -10,7 +10,7 @@ const TradingPair = ({ onChange, selectSymbol }) => {
   const [selectedCoins, setSelectedCoins] = useState(['', '']);
 
   useEffect(() => {
-    setSelectedCoins((prevState) => [coins, prevState[0]]);
+    setSelectedCoins((prevState) => [coins, prevState[0], prevState[1]]);
   }, [coins]);
 
   const isCoinExistInSymbols = (coin) =>
