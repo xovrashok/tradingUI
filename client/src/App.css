@@ -10,7 +10,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  background: linear-gradient(to left, rgb(0, 0, 0) 0%, rgb(28, 28, 28) 100%);
+  background: linear-gradient(to left, rgb(17, 17, 17) 0%, rgb(28, 28, 28) 100%);
 }
 
 p {
@@ -21,7 +21,36 @@ p {
   margin-top: 16px;
   margin-bottom: 16px;
   font-size: 20px;
-  color: rgb(61, 61, 61);
+  color: grey;
+}
+
+.mainview {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+}
+
+.optionside {
+  min-width: 420px;
+}
+
+.graphside {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px;
+  border-radius: 6px;
+  border-style: solid;
+  border-color: rgb(56, 56, 56);
+  margin: 4px;
+}
+
+.main-graph-component {
+  color: white;
+  width: 92%;
+  height: 98%;
+  border-radius: 6px;
+  border-color: rgb(56, 56, 56);
+  margin-top: 20px;
 }
 
 .contenitore {
@@ -78,7 +107,7 @@ p {
 }
 
 .selection {
-  background-color: #282b34;
+  background-color: transparent;
   color: white;
   font-size: 20px;
   font-weight: bold;
@@ -88,14 +117,16 @@ p {
   width: 82%;
   border-radius: 6px;
   margin-top: 8px;
-  padding: 8px;
+  padding: 6px;
   margin-bottom: 10px;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 1px 1px 4px rgb(255, 255, 255);
+  box-shadow: 1px 1px 4px #29f1ff;
+
 }
+
 .selectionSy {
-  background-color: #282b34;
+  background-color: transparent;
   color: white;
   font-size: 28px;
   font-weight: bold;
@@ -108,18 +139,18 @@ p {
   margin-left: 28px;
   padding: 16px;
   margin-bottom: 18px;
-  box-shadow: 1px 1px 4px rgb(255, 255, 255);
+  box-shadow: 1px 1px 4px #29f1ff;
   width: 66%;
 }
 .selection1 {
   font-family: 'Open Sans Condensed', sans-serif;
-  background-color: #282b34;
+  background-color: transparent;
   cursor: pointer;
-  color: white;
+  color: #8bf0f8;
   font-size: 18px;
   border: 1px;
   border-style: solid;
-  border-color: rgb(104, 104, 104);
+  border-color: grey;
   width: 72%;
   border-radius: 6px;
   margin-top: 8px;
@@ -157,19 +188,21 @@ p {
 }
 
 .button-opt {
-  background-color: #181a20;
-  color: rgb(209, 209, 209);
-  font-size: 12px;
+  background-color: transparent;
+  color: white;
+  font-size: 10px;
   padding: 2px 8px;
   margin: 2px;
   cursor: pointer;
+  border: 1px;
   border-style: solid;
+  border-color: rgb(104, 104, 104);
   border-radius: 6px;
   width: 100%;
 }
 
 .button-opt:hover {
-  opacity: 0.8;
+  color: #29f1ff;
 }
 
 .button-opt:active {
@@ -227,13 +260,12 @@ p {
   grid-template-columns: 0.3fr 1fr 1fr 1fr 1fr 0.7fr 1fr;
   align-items: center;
   justify-content: center;
-  border: 2px;
-  border: solid;
+  overflow: hidden;
+  border: 1px solid rgb(56, 56, 56);
   border-radius: 6px;
-  border-color: rgb(56, 56, 56);
   font-size: 18px;
   color: rgb(255, 255, 255);
-  margin: 6px 4px 0px 4px;
+  margin: 10px 4px 0px 4px;
 }
 
 .container {
@@ -242,12 +274,11 @@ p {
   grid-template-columns: 0.3fr 1fr 1fr 1fr 1fr 0.7fr 1fr;
   justify-content: center;
   align-items: center;
-  border: 1px;
-  border-bottom: solid;
-  border-color: rgb(56, 56, 56);
+  border-bottom: 1px solid rgb(56, 56, 56);
+  padding-bottom: 6px;
   font-size: 20px;
   color: rgb(255, 255, 255);
-  margin: 0px 10px 0px 10px;
+  margin: 10px 10px 0px 10px;
 }
 
 .pnl {
@@ -281,12 +312,13 @@ p {
 }
 
 .close-button {
-  background-color: #181a20;
-  color: rgb(209, 209, 209);
+  color: white;
+  background-color: transparent;
   cursor: pointer;
   padding: 8px 12px;
   border-style: solid;
   border-radius: 6px;
+  border-color: rgb(56, 56, 56);
   font-size: 18px;
   transition: opacity 0.15s;
   width: 45px;
@@ -294,7 +326,7 @@ p {
 }
 
 .close-button:hover {
-  opacity: 0.8;
+  color: #29f1ff;
 }
 
 .close-button:active {
@@ -309,16 +341,18 @@ p {
 }
 
 .reduce-button {
-  background-color: #181a20;
-  color: rgb(209, 209, 209);
+  background-color: transparent;
+  color: white;
   cursor: pointer;
   padding: 12px 4px;
   transition: opacity 0.15s;
   border-radius: 6px;
+  border-color: rgb(56, 56, 56);
+  border-style: solid;
 }
 
 .reduce-button:hover {
-  opacity: 0.8;
+  color: #29f1ff;
 }
 
 .reduce-button:active {
@@ -335,5 +369,5 @@ p {
   background-color: #1e1d1d;
   border: 1px solid rgb(104, 104, 104);
   margin-bottom: 8px;
-  margin-top: 30px;
+  margin-top: 40px;
 }
