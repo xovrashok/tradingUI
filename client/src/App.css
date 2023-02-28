@@ -30,7 +30,7 @@ p {
 }
 
 .optionside {
-  min-width: 420px;
+  min-width: 400px;
 }
 
 .graphside {
@@ -142,6 +142,7 @@ p {
   box-shadow: 1px 1px 4px #29f1ff;
   width: 66%;
 }
+
 .selection1 {
   font-family: 'Open Sans Condensed', sans-serif;
   background-color: transparent;
@@ -202,7 +203,7 @@ p {
 }
 
 .button-opt:hover {
-  color: #29f1ff;
+  color: #8bf0f8;
 }
 
 .button-opt:active {
@@ -298,15 +299,17 @@ p {
 }
 
 .green-circle {
-  width: 8px;
-  height: 40px;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
   background-color: rgb(14, 203, 129);
   margin: 0 auto;
 }
 
 .red-circle {
-  width: 8px;
-  height: 40px;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
   background-color: rgb(246, 70, 93);
   margin: 0 auto;
 }
@@ -326,7 +329,7 @@ p {
 }
 
 .close-button:hover {
-  color: #29f1ff;
+  color: #8bf0f8;
 }
 
 .close-button:active {
@@ -352,7 +355,7 @@ p {
 }
 
 .reduce-button:hover {
-  color: #29f1ff;
+  color: #8bf0f8;
 }
 
 .reduce-button:active {
@@ -369,5 +372,5 @@ p {
   background-color: #1e1d1d;
   border: 1px solid rgb(104, 104, 104);
   margin-bottom: 8px;
-  margin-top: 40px;
+  margin-top: 16px;
 }

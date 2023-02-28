@@ -20,7 +20,7 @@
 }
 
 .tab button:hover {
-  background-color: grey;
+  color: #29f1ff;
 }
 
 .tab button.active {
