@@ -39,7 +39,7 @@ const App = () => {
           </div>
           <div className='graphside'>
             <div className='main-graph-component'>
-              <ChartComponent selectedSymbol={selectedSymbol}></ChartComponent>
+              <ChartComponent selectedSymbol={selectedSymbol}/>
             </div>
           </div>
         </div>
@@ -47,8 +47,6 @@ const App = () => {
 
         <ReLoader />
         <Tabs />
-        <Positions />
-        <Bags />
       </div>
     </SWRConfig>
   );
