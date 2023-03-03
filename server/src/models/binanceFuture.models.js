@@ -4,14 +4,14 @@ require('dotenv').config();
 
 const binanceFuture = new ccxt.pro.binanceusdm({
   //'rateLimit': 1000,
-  'apiKey': process.env.BINANCE_API_KEY,
-  'secret': process.env.BINANCE_SECRET_KEY,
+  'apiKey': 'd80e3007eb778f434a24513cc8ebe194bebbff6b3b8f6f032407fd074364eae4',
+  'secret': '3b729b4b9ece44cf83675b1ca554912e8c28aaacba124a4b88b29af42e536e35',
   'options': { 
     'defaultType': 'future', 
     'adjustForTimeDifference': true,
   } 
 });
-//binanceFuture.setSandboxMode(true);
+binanceFuture.setSandboxMode(true);
 
 async function loadFutureMarkets() { 
   const markets = await binanceFuture.loadMarkets();

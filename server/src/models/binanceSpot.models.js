@@ -3,14 +3,14 @@ require('dotenv').config();
 
 const binance = new ccxt.pro.binanceusdm({
   //'rateLimit': 1000,
-  apiKey: process.env.BINANCE_API_KEY,
-  secret: process.env.BINANCE_SECRET_KEY,
+  apiKey: 'kmaqlWbadVXrzs3vifCrkjpiekM2ISObYKKOtpX8H3qkYvubYR6ZmXz6Ao5oUwqK',
+  secret: '8Mz7OU9D0Q1NgqSewjcL5MnyxXCdYtRvkja5SEyXotpK8HVmlGUvqHTjXd2NChtx',
   options: {
     defaultType: 'spot',
     adjustForTimeDifference: true,
   },
 });
-//binance.setSandboxMode(true);
+binance.setSandboxMode(true);
 const binanceFuture = new ccxt.pro.binanceusdm({ options: { defaultType: 'future' } });
 
 async function loadSpotMarkets() {

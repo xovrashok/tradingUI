@@ -3,49 +3,33 @@ import Positions from '../Positions';
 import Bags from '../Bags';
 import { useState } from 'react';
 
+const tabNames = {
+  Positions: 'Positions',
+  Orders: 'Orders',
+  Bags: 'Bags',
+};
+
 const Tabs = () => {
-  const [showPositions, setShowPositions] = useState(false);
-  const [showOrders, setShowOrders] = useState(false);
-  const [showBags, setShowBags] = useState(false);
+  const [tabName, setTabName] = useState('Positions');
 
-  const handlePositionsClick = () => {
-    setShowPositions(!showPositions);
-    setShowOrders(false);
-    setShowBags(false);
-  };
-
-  const handleOrdersClick = () => {
-    setShowPositions(false);
-    setShowOrders(!showOrders);
-    setShowBags(false);
-  };
-
-  const handleBagsClick = () => {
-    setShowPositions(false);
-    setShowOrders(false);
-    setShowBags(!showBags);
-  };
+  const handleTabChange = (event) => setTabName(event.target.value);
 
   return (
     <div className="tab">
-      <button onClick={handlePositionsClick}>Positions</button>
-      <button onClick={handleOrdersClick}>Orders</button>
-      <button onClick={handleBagsClick}>Bags</button>
-      {showPositions && (
-        <div className="content">
-          <Positions />
-        </div>
-      )}
-      {showOrders && (
-        <div className="content">
-          <Positions />
-        </div>
-      )}
-      {showBags && (
-        <div className="content">
-          <Bags />
-        </div>
-      )}
+      <button value={tabNames.Positions} onClick={handleTabChange}>
+        Positions
+      </button>
+      <button value={tabNames.Orders} onClick={handleTabChange}>
+        Orders
+      </button>
+      <button value={tabNames.Bags} onClick={handleTabChange}>
+        Bags
+      </button>
+      <div className="content">
+        {tabName === tabNames.Positions && <Positions />}
+        {tabName === tabNames.Orders && <Positions />}
+        {tabName === tabNames.Bags && <Bags />}
+      </div>
     </div>
   );
 };

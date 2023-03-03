@@ -12,11 +12,11 @@ const ChartComponent = (props) => {
       areaTopColor = '#29f1ff',
       areaBottomColor = 'rgba(7, 7, 7, 0.08)',
     } = {},
+    selectedSymbol,
   } = props;
   const chartContainerRef = useRef();
-  const [interval, setInterval] = useState('1');
-  const { chartData } = useChartHistory(interval);
-  const { trade } = useSocketSymbols();
+  const { chartData } = useChartHistory(selectedSymbol);
+  const { trade } = useSocketSymbols(selectedSymbol);
   const [results, setResults] = useState([]);
   const [chartInstance, setChartInstance] = useState({});
   const [chartInitialize, setChartInitialize] = useState({});
@@ -90,6 +90,12 @@ const ChartComponent = (props) => {
     setChartInstance(newSeries);
 
     newSeries.setData(formattedChartData);
+    newSeries.applyOptions({
+      priceFormat: {
+        precision: 8,
+        minMove: 0.00000001,
+      },
+    });
     chart.timeScale().fitContent();
 
     window.addEventListener('resize', handleResize);

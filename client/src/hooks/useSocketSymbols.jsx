@@ -3,7 +3,6 @@ import useWebSocket from 'react-use-websocket';
 
 const useSocketSymbols = (selectedSymbol) => {
   const [trade, setTrade] = useState({});
-
   const symbSocket = selectedSymbol ? selectedSymbol.label.replace(/[^a-z]/gi, '').toLowerCase() : 'btcusdt';
   const { lastMessage } = useWebSocket(`wss://stream.binance.com:9443/ws/${symbSocket}@kline_1s`, {
     shouldReconnect: (closeEvent) => false,
@@ -15,7 +14,7 @@ const useSocketSymbols = (selectedSymbol) => {
   useEffect(() => {
     if (lastMessage) {
       const message = JSON.parse(lastMessage?.data);
-      const time = new Date(message.E).getTime();
+      const time = message.E;
       const value = Number(message.k.l);
 
       const array = { time, value };

@@ -13,16 +13,15 @@ const useSocket = () => {
     reconnectInterval: 3000,
   });
 
-  const isCoinExistInSymbols = (coin) =>
-    symbols.find((symbol) => symbol.label === coin);
+  const isCoinExistInSymbols = (coin) => symbols.find((symbol) => symbol.label === coin);
 
   const coinWithOthersQuoteCurr = (coin) => {
     const newCoin = coin.replace(/USDT/gi, 'BUSD');
     symbols.find((symbol) => symbol.label === newCoin);
-  }
+  };
 
   useEffect(() => {
-    sendMessage('login 842752f3f9b8271110aa50829407762f536b8a34e43661db7f3e3ff4cb8ca772')
+    sendMessage('login 842752f3f9b8271110aa50829407762f536b8a34e43661db7f3e3ff4cb8ca772');
   }, []);
 
   useEffect(() => {
@@ -34,7 +33,8 @@ const useSocket = () => {
         const newTitle = title.replace(/\/.*/, '/USDT');
         if (isCoinExistInSymbols(newTitle)) {
           setCoins(newTitle);
-        } if (coinWithOthersQuoteCurr(newTitle)) {
+        }
+        if (coinWithOthersQuoteCurr(newTitle)) {
           const newCoin = newTitle.replace(/USDT/gi, 'BUSD');
           setCoins(newCoin);
         }
