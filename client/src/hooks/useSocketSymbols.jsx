@@ -14,7 +14,7 @@ const useSocketSymbols = (selectedSymbol) => {
   useEffect(() => {
     if (lastMessage) {
       const message = JSON.parse(lastMessage?.data);
-      const time = message.E;
+      const time = (message.E /1000) + 3600;
       const value = Number(message.k.l);
 
       const array = { time, value };

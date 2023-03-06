@@ -2,11 +2,12 @@ import { createChart } from 'lightweight-charts';
 import React, { useEffect, useRef, useState } from 'react';
 import useChartHistory from '../../hooks/useChartsHistory';
 import useSocketSymbols from '../../hooks/useSocketSymbols';
+import Switcher from '../Switcher';
 
 const ChartComponent = (props) => {
   const {
     colors: {
-      backgroundColor = 'transparent',
+      background = { type: 'solid', color: 'transparent' },
       lineColor = '#29f1ff',
       textColor = 'grey',
       areaTopColor = '#29f1ff',
@@ -15,7 +16,8 @@ const ChartComponent = (props) => {
     selectedSymbol,
   } = props;
   const chartContainerRef = useRef();
-  const { chartData } = useChartHistory(selectedSymbol);
+  const [interval, setInterval] = useState('1s');
+  const { chartData } = useChartHistory(selectedSymbol, interval);
   const { trade } = useSocketSymbols(selectedSymbol);
   const [results, setResults] = useState([]);
   const [chartInstance, setChartInstance] = useState({});
@@ -33,12 +35,7 @@ const ChartComponent = (props) => {
   }, [trade]);
 
   const newChartData = () => {
-    return chartData.map((cart) => {
-      return {
-        time: Number(cart[0]),
-        value: Number(cart[1]),
-      };
-    });
+    return chartData.map((cart) => ({ time: cart[0] / 1000 + 3600, value: Number(cart[1]) }));
   };
 
   useEffect(() => {
@@ -54,7 +51,7 @@ const ChartComponent = (props) => {
     };
     const chart = createChart(chartContainerRef.current, {
       layout: {
-        backgroundColor,
+        background,
         textColor,
         lineColor,
       },
@@ -92,8 +89,8 @@ const ChartComponent = (props) => {
     newSeries.setData(formattedChartData);
     newSeries.applyOptions({
       priceFormat: {
-        precision: 8,
-        minMove: 0.00000001,
+        precision: formattedChartData[0].value > 1 ? 2 : 8,
+        minMove: formattedChartData[0].value > 1 ? 0.01 : 0.00000001,
       },
     });
     chart.timeScale().fitContent();
@@ -110,6 +107,7 @@ const ChartComponent = (props) => {
   return (
     <>
       <div>
+        <Switcher setInterval={setInterval} />
         <div ref={chartContainerRef} />
       </div>
     </>
