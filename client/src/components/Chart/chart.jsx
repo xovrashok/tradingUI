@@ -18,7 +18,7 @@ const ChartComponent = (props) => {
   const chartContainerRef = useRef();
   const [interval, setInterval] = useState('1s');
   const { chartData } = useChartHistory(selectedSymbol, interval);
-  const { trade } = useSocketSymbols(selectedSymbol);
+  const { trade } = useSocketSymbols(selectedSymbol, interval);
   const [results, setResults] = useState([]);
   const [chartInstance, setChartInstance] = useState({});
   const [chartInitialize, setChartInitialize] = useState({});
@@ -107,7 +107,7 @@ const ChartComponent = (props) => {
   return (
     <>
       <div>
-        <Switcher setInterval={setInterval} />
+        <Switcher interval={interval || '1s'} setInterval={setInterval} />
         <div ref={chartContainerRef} />
       </div>
     </>

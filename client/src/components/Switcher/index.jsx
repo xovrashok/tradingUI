@@ -1,25 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 
+const options = {
+  OneSec: '1s',
+  OneMin: '1m',
+};
 function Switcher(props) {
-    const { setInterval } = props;
-    const [selectedOption, setSelectedOption] = useState('1s');
-
-  const oneSecClick = () => {
-    setSelectedOption('1s');
-    setInterval('1s');
-  };
-
-  const oneMinClick = () => {
-    setSelectedOption('1m');
-    setInterval('1m');
-  };
+  const { interval, setInterval } = props;
 
   return (
     <div className="switcher">
-      <div className={`switcher-item ${selectedOption === '1s' ? 'active' : ''}`} onClick={oneSecClick}>
+      <div className={`switcher-item ${interval === '1s' ? 'active' : 'switcher-item'}`} onClick={() => setInterval(options.OneSec)}>
         1s
       </div>
-      <div className={`switcher-item ${selectedOption === '1m' ? 'active' : ''}`} onClick={oneMinClick}>
+      <div className={`switcher-item ${interval === '1m' ? 'active' : ''}`} onClick={() => setInterval(options.OneMin)}>
         1m
       </div>
     </div>
