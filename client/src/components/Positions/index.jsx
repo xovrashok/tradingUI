@@ -13,7 +13,7 @@ const Positions = () => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [refetch]);
+  }, [mutate]);
 
   return (
     <>
@@ -32,6 +32,7 @@ const Positions = () => {
                   <div>Close</div>
                 </div>
                 {positions.map((position, index) => {
+                  console.log(position, 'in arr')
                   return (
                     <div key={index} className="container">
                       <div>
