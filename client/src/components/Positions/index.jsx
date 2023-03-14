@@ -9,11 +9,13 @@ const Positions = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      refetch();
+      if (positions.length > 0) {
+        refetch();
+      }
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [mutate]);
+  }, [mutate, positions]);
 
   return (
     <>
