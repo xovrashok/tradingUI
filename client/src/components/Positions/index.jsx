@@ -4,18 +4,17 @@ import config from '../../config';
 import { useEffect } from 'react';
 
 const Positions = () => {
-  const { data: positions, isLoading, refetch, mutate } = usePosition();
+  const { data: positions, isLoading, refetch } = usePosition();
   const { closePosition } = useClosePosition();
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    setTimeout(() => {
       if (positions.length > 0) {
         refetch();
       }
     }, 1000);
 
-    return () => clearInterval(interval);
-  }, [mutate, positions]);
+  }, [positions]);
 
   return (
     <>
